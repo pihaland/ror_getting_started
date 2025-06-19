@@ -1,6 +1,5 @@
 class ArticlesController < ApplicationController
   def index
-
     base = "https://meowfacts.herokuapp.com"
     endpoint = "/?count=3"
     url = URI(base + endpoint)
