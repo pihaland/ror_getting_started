@@ -1,5 +1,17 @@
 <h1>Articles</h1>
-<br><i>
+
+<p style="color: red"> Here are three random facts from the MeowFacts API </p>
+
+<% if @facts == nil %>
+  <%= "Nothing has been gotten from the API" %>
+<% else %>
+  <% @facts.each do |fact| %>
+    <div style="border: darkblue solid 1px; margin-top: 10px"><%= fact %></div>
+  <% end %>
+<% end %>
+<br>
+
+<br><br><i>
   Build a page that shows a complex output of records (e.g. for each discussion the number of comments, the number of
   participating users and the latest comment) - this is due to more complex work with ActiveRecord (AR)
 </i><br><br>

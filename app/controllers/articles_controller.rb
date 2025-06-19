@@ -1,9 +1,17 @@
 class ArticlesController < ApplicationController
   def index
+
+    base = "https://meowfacts.herokuapp.com"
+    endpoint = "/?count=3"
+    url = URI(base + endpoint)
+    response = Net::HTTP.get(url)
+    data = JSON.parse(response)
+    @facts = data["data"] || []
+
     @articles = Article.all
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render xml: @articles }
+      format.xml { render xml: @articles }
       format.json { render json: @articles }
     end
   end
