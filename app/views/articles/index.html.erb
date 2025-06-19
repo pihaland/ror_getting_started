@@ -1,11 +1,39 @@
 <h1>Articles</h1>
+<br><i>
+  Build a page that shows a complex output of records (e.g. for each discussion the number of comments, the number of
+  participating users and the latest comment) - this is due to more complex work with ActiveRecord (AR)
+</i><br><br>
 
-<ul>
-  <% @articles.each do |article| %>
-    <li>
-      <%= link_to article.title, article %>
-    </li>
-  <% end %>
-</ul>
+<% @articles.each do |article| %>
+  <div style="border: black solid 1px; padding: 20px">
+    <p> Title:
+      <b>
+        <%= link_to article.title, article %>
+      </b>
+    </p>
+    <p> Comments count:
+      <%= article.comments.count %>
+    </p>
+    <p> Authors count:
+      <%= article.comments.map { |c| c.commenter }.uniq.count %>
+    </p>
+    <div style="background: lavenderblush; padding: 8px"> Last comment:<br>
+      <% if article.comments.any? %>
+        Commenter:
+        <%= article.comments.last.commenter %>
+        <br>
+        Comment:
+        <%= article.comments.last.body %>
+        <br>
+        Time:
+        <%= article.comments.last.created_at %>
+        <br>
+      <% else %>
+        No comments yet
+      <% end %>
 
-<%= link_to "New Article", new_article_path %>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to "Create new Article", new_article_path, style: "border: black solid 1px; padding: 20px; color: Blue; text-decoration: none; display: inline-block; background-color: gold" %>
